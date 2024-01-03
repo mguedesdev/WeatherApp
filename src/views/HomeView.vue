@@ -19,8 +19,11 @@
           No results match your search, try a different city or state.
         </p>
         <template v-else>
-          <li v-for="searchResult in mapboxSearchResults" :key="searchResult.id"
+          <li
+          v-for="searchResult in mapboxSearchResults"
+          :key="searchResult.id"
           class="py-2 cursor-pointer hover:bg-weather-primary duration-100"
+          @click="previewCity(searchResult)"
           >
             {{searchResult.place_name}}
           </li>
@@ -33,12 +36,31 @@
 <script setup>
   import {ref} from 'vue'
   import axios from 'axios'
+  import { useRouter } from 'vue-router'
 
   const serachQuery = ref('');
   const queryTimeout = ref(null);
   const mapboxSearchResults = ref(null);
   const mapboxAPIKey = "pk.eyJ1IjoibWd1ZWRlc2RldiIsImEiOiJjbHF5MHg2YWowam44MmtsY296emIxOHp3In0.c-0Fm4ifUJ-ZS4Y2VCHa3Q";
   const searchError = ref(null);
+
+  const router = useRouter();
+
+  const previewCity = (searchResult) => {
+    const [city, state] = searchResult.place_name.split(', ');
+    router.push({
+      name: 'cityView',
+      params: {
+        city,
+        state:state.replaceAll(' ', '')
+      },
+      query: {
+        lat: searchResult.geometry.coordinates[1],
+        lng: searchResult.geometry.coordinates[0],
+        preview: true,
+      }
+    })
+  }
 
   const getSearchRsults = () => {
     clearTimeout(queryTimeout.value);
