@@ -56,16 +56,18 @@
     </div>
     <hr class=" border-white border-opacity-10 border w-full">
     <!-- Hourly Weather -->
-    <TableWeather :weatherData="HourlyWeather" />
+    <HourlyWeather :weatherData="hourlyWeather" />
     <!-- Daily Weather -->
-    <TableWeather :weatherData="DailyWeather" />
+    <WeekWeather :weatherData="weekWeather" />
+    
   </div>
 </template>
 
 <script setup>
   import axios from 'axios';
   import { useRoute } from 'vue-router';
-  import TableWeather from './TableWeather.vue';
+  import HourlyWeather from './HourlyWeather.vue';
+  import WeekWeather from './WeekWeather.vue';
 
   const route = useRoute();
   const getWeatherData = async () => {
@@ -96,7 +98,7 @@
   }
   const weatherData = await getWeatherData();
 
-  const HourlyWeather = {
+  const hourlyWeather = {
     title: 'Hourly Weather',
     data: weatherData.hourly.map((hour) => {
       return {
@@ -114,20 +116,23 @@
     }),
   }
 
-  const DailyWeather = {
+  const weekWeather = {
     title: 'Daily Weather',
     data: weatherData.daily.map((day) => {
       return {
         time: new Date(day.dt * 1000).toLocaleDateString(
           "en-us",
           {
-            weekday: "short",
+            weekday: "long",
           }
         ),
         temp: Math.round(day.temp.max),
+        tempMin: Math.round(day.temp.min),
+        tempMax: Math.round(day.temp.max),
         feelsLike: Math.round(day.feels_like.day),
         description: day.weather[0].description,
         icon: day.weather[0].icon,
+
       };
     }),
   }
