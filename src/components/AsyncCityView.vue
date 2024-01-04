@@ -6,13 +6,6 @@
         You are currently previewing this city, click the "+" icon to start tracking this city.
       </p>
     </div>
-    <!-- Weather Overview -->
-    <!-- <div class="flex flex-col items-center">
-      <h1 class="text-4xl font-bold">{{ weatherData.data.timezone }}</h1>
-      <p class="text-xl">{{ new Date(weatherData.data.currentTime).toLocaleString() }}</p>
-      <p class="text-6xl font-bold">{{ Math.round(weatherData.data.current.temp) }}°</p>
-      <p class="text-xl">{{ weatherData.data.current.weather[0].description }}</p>
-    </div> -->
     <div class="flex flex-col items-center text-white py-12">
       <h1 class="text-4xl mb-2">{{ route.params.city }}</h1>
       <p class="text-sm mb-12">

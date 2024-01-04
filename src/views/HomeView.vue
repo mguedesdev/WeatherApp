@@ -30,6 +30,14 @@
         </template>
       </ul>
     </div>
+    <div class="flex flex-col gap-4">
+      <Suspense>
+        <CityList/>
+        <template #fallback>
+          <p>Loading...</p>
+        </template>
+      </Suspense>
+    </div>
   </main>
 </template>
 
@@ -37,6 +45,7 @@
   import {ref} from 'vue'
   import axios from 'axios'
   import { useRouter } from 'vue-router'
+  import CityList from '@/components/CityList.vue';
 
   const serachQuery = ref('');
   const queryTimeout = ref(null);
@@ -48,17 +57,25 @@
 
   const previewCity = (searchResult) => {
     const [city, state] = searchResult.place_name.split(', ');
+    let savedCities = JSON.parse(localStorage.getItem('savedCities')) || [];
+    let cityExists = savedCities.some(savedCity => savedCity.city === city && savedCity.state === state.replaceAll(' ', ''));
+
+    let query = {
+      lat: searchResult.geometry.coordinates[1],
+      lng: searchResult.geometry.coordinates[0]
+    };
+
+    if (!cityExists) {
+      query.preview = true;
+    }
+
     router.push({
       name: 'cityView',
       params: {
         city,
-        state:state.replaceAll(' ', '')
+        state: state.replaceAll(' ', '')
       },
-      query: {
-        lat: searchResult.geometry.coordinates[1],
-        lng: searchResult.geometry.coordinates[0],
-        preview: true,
-      }
+      query
     })
   }
 
