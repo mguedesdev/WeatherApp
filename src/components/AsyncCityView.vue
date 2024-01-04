@@ -56,63 +56,16 @@
     </div>
     <hr class=" border-white border-opacity-10 border w-full">
     <!-- Hourly Weather -->
-    <div class="max-w-screen-md w-full py-12">
-      <div class="mx-8 text-white">
-        <h2 class="mb-4">Hourly Weather</h2>
-          <div class="flex gap-10 overflow-x-scroll scrollbar scrollbar-thumb-weather-secondary scrollbar-track-gray-800 ">
-          <div v-for="hourData in weatherData.hourly"
-          :key="hourData.dt"
-          class="flex flex-col gap-4 items-center text-center mb-2"
-          >
-            <!-- <p class="text-sm">
-              {{
-                new Date(hourData.currentTime).toLocaleTimeString(
-                  "en-us",
-                  {
-                    timeStyle: "short",
-                  }
-                )
-              }}
-            </p>
-            <img
-              class="w-[50px] h-auto"
-              :src="
-                `http://openweathermap.org/img/wn/${hourData.weather[0].icon}.png`
-              "
-              alt=""
-            />
-            <p class="text-sm">
-              {{ Math.round(hourData.temp) }}&deg;
-            </p> -->
-            <p class="whitespace-nowrap text-md">
-              {{
-                new Date(
-                  hourData.currentTime
-                ).toLocaleTimeString("en-us", {
-                  hour: "numeric",
-                })
-              }}
-            </p>
-            <img
-              class="w-auto h-[50px] object-cover"
-              :src="
-                `http://openweathermap.org/img/wn/${hourData.weather[0].icon}@2x.png`
-              "
-              alt=""
-            />
-            <p class="text-xl">
-              {{ Math.round(hourData.temp) }}&deg;
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <TableWeather :weatherData="HourlyWeather" />
+    <!-- Daily Weather -->
+    <TableWeather :weatherData="DailyWeather" />
   </div>
 </template>
 
 <script setup>
   import axios from 'axios';
   import { useRoute } from 'vue-router';
+  import TableWeather from './TableWeather.vue';
 
   const route = useRoute();
   const getWeatherData = async () => {
@@ -142,7 +95,44 @@
     
   }
   const weatherData = await getWeatherData();
-  console.log(weatherData);
+
+  const HourlyWeather = {
+    title: 'Hourly Weather',
+    data: weatherData.hourly.map((hour) => {
+      return {
+        time: new Date(hour.currentTime).toLocaleTimeString(
+          "en-us",
+          {
+            hour: "numeric",
+          }
+        ),
+        temp: Math.round(hour.temp),
+        feelsLike: Math.round(hour.feels_like),
+        description: hour.weather[0].description,
+        icon: hour.weather[0].icon,
+      };
+    }),
+  }
+
+  const DailyWeather = {
+    title: 'Daily Weather',
+    data: weatherData.daily.map((day) => {
+      return {
+        time: new Date(day.dt * 1000).toLocaleDateString(
+          "en-us",
+          {
+            weekday: "short",
+          }
+        ),
+        temp: Math.round(day.temp.max),
+        feelsLike: Math.round(day.feels_like.day),
+        description: day.weather[0].description,
+        icon: day.weather[0].icon,
+      };
+    }),
+  }
+  
+
 </script>
 
 <style scoped>
