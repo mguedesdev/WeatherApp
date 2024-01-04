@@ -6,7 +6,9 @@ export default {
       colors: {
         "weather-primary": "#0D1821",
         "weather-secondary": "#344966",
-      }
+        
+      },
+      scrollbar: ['dark'],
     },
     fontFamily: {
       sans: ["Roboto", "sans-serif"],
@@ -20,6 +22,6 @@ export default {
       md: "768px",
     }
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar'),],
 }
 
