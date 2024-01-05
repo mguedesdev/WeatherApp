@@ -2,7 +2,11 @@
   <div class="flex flex-col min-h-screen font-Roboto bg-weather-primary">
     
     <SiteNavigation />
-    <RouterView />
+    <RouterView v-slot="{ Component }">
+      <transition name="page" mode="out-in">
+        <component :is="Component" />
+      </transition>
+    </RouterView>
   </div>
   
 </template>
@@ -24,5 +28,16 @@ export default {
 </script>
 
 <style>
+  .page-enter-active,
+  .page-leave-active {
+    transition: 0.4s ease all;
+
+  }
+
+  .page-enter-from,
+  .page-leave-to {
+    opacity: 0;
+  }
+
 
 </style>
