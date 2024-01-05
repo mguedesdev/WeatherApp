@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-screen-md w-full py-12">
       <div class="mx-8 text-white">
-        <h2 class="mb-4">{{weatherData.title}}</h2>
+        <h2 class="mb-4 text-lg">{{weatherData.title}}</h2>
           <div class="flex gap-10 space-x-1 overflow-x-scroll scrollbar scrollbar-thumb-weather-secondary scrollbar-track-gray-800 ">
           <div v-for="weather in weatherData.data"
           :key="weather.time"

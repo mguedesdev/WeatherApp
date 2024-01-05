@@ -65,13 +65,8 @@
       <!-- More infos -->
 
       <div class="w-[53%] flex flex-col border-l border-gray-400 pl-6 mr-8 gap-5">
-        <div>
-          <p class="text-1xl">Today's Highlights</p>
-        </div>
-
+        <p>Today's Highlights</p>
         <div class="flex flex-1 border-b border-white border-opacity-10 items-center pb-2">
-          <!-- colocar um titulo para essa div dentro de um p -->
-          
           <div class="flex flex-1 items-center flex-col">
             <p class="text-2xl flex items-center gap-1">
               <i class=" text-[17px] text-blue-500 fa-solid fa-down-long"></i>
@@ -91,7 +86,7 @@
             <div class=" flex items-center gap-1">
               
               <div class="flex items-center flex-col">
-                {{
+                <p class=" text-xl">{{
                 new Date(weatherData.daily[0].sunrise * 1000).toLocaleTimeString(
                   "en-us",
                   {
@@ -101,7 +96,8 @@
                   }
                 )
               }}
-              <p>Sunrise</p></div>
+              </p>
+              <p class="text-sm">Sunrise</p></div>
               
             </div>
             </div>
@@ -110,7 +106,7 @@
             <div class=" flex items-center gap-1">
               
               <div class="flex items-center flex-col">
-                {{
+                <p class=" text-xl">{{
                 new Date(weatherData.daily[0].sunset * 1000).toLocaleTimeString(
                   "en-us",
                   {
@@ -120,7 +116,8 @@
                   }
                 )
               }}
-              <p>Sunset</p></div>
+              </p>
+              <p class="text-sm">Sunset</p></div>
               
             </div>
             </div>
@@ -181,7 +178,7 @@
               <p class="text-2xl">
               {{ Math.round(weatherData.daily[0].wind_speed) }} 
             </p>
-            <p>mph</p>
+            <p class="text-sm">mph</p>
             </div>
             <p class="text-sm">Wind</p>
           </div>
@@ -193,7 +190,7 @@
     <!-- Hourly Weather -->
     <HourlyWeather :weatherData="hourlyWeather" />
     <!-- Daily Weather -->
-    <WeekWeather :weatherData="weekWeather" />
+    <WeekWeather :weatherData="weatherData" />
     
     <div
       v-if="!route.query.preview"
@@ -261,7 +258,7 @@
       };
     }),
   }
-
+  console.log(weatherData);
   const weekWeather = {
     title: 'Week Weather',
     data: weatherData.daily.map((day) => {
@@ -278,6 +275,8 @@
         feelsLike: Math.round(day.feels_like.day),
         description: day.weather[0].description,
         icon: day.weather[0].icon,
+
+
 
       };
     }),
