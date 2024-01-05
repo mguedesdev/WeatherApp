@@ -6,45 +6,187 @@
         You are currently previewing this city, click the "+" icon to start tracking this city.
       </p>
     </div>
-    <div class="flex flex-col items-center text-white py-12">
-      <h1 class="text-4xl mb-2">{{ route.params.city }}</h1>
-      <p class="text-sm mb-12">
-        {{
-          new Date(weatherData.currentTime).toLocaleDateString(
-            "en-us",
-            {
-              weekday: "short",
-              day: "2-digit",
-              month: "long",
-            }
-          )
-        }}
-        {{
-          new Date(weatherData.currentTime).toLocaleTimeString(
-            "en-us",
-            {
-              timeStyle: "short",
-            }
-          )
-        }}
-      </p>
-      <p class="text-8xl mb-8">
-        {{ Math.round(weatherData.current.temp) }}&deg;
-      </p>
-      <p>
-        Feels like
-        {{ Math.round(weatherData.current.feels_like) }} &deg;
-      </p>
-      <p class="capitalize">
-        {{ weatherData.current.weather[0].description }}
-      </p>
-      <img
-        class="w-[150px] h-auto"
-        :src="
-          `http://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}@2x.png`
-        "
-        alt=""
-      />
+    <div class="flex max-w-screen-md w-full text-white py-12">
+      <!-- Current Weather -->
+      <div class=" w-[50%] flex flex-col flex-1 items-center ml-8 mr-4">
+        <div class="flex flex-col flex-1 items-center">
+          <h1 class="text-4xl mb-2">{{ route.params.city }}</h1>
+          <p class="text-sm mb-4">
+            {{
+              new Date(weatherData.currentTime).toLocaleDateString(
+                "en-us",
+                {
+                  weekday: "short",
+                  day: "2-digit",
+                  month: "long",
+                }
+              )
+            }}
+            {{
+              new Date(weatherData.currentTime).toLocaleTimeString(
+                "en-us",
+                {
+                  timeStyle: "short",
+                }
+              )
+            }}
+          </p>
+          
+          
+          
+        </div>
+        <div class="flex gap-6">
+          
+          <div class="flex flex-col flex-1 items-center"> 
+            <p class="text-7xl flex flex-1 mt-6 justify-center">
+              {{ Math.round(weatherData.current.temp) }}&deg;
+            </p>
+            <p class="flex justify-center">
+              Feels like
+              {{ Math.round(weatherData.current.feels_like) }} &deg;
+            </p>
+          </div>
+
+          <div class="flex flex-col flex-1 items-center">
+            <img
+              class="w-[110px] h-auto justify-center"
+              :src="
+                `http://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}@2x.png`
+              "
+              alt=""
+            />
+            <p class="capitalize text-center justify-center">
+              {{ weatherData.current.weather[0].description }}
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- More infos -->
+
+      <div class="w-[53%] flex flex-col border-l border-gray-400 pl-6 mr-8 gap-5">
+        <div>
+          <p class="text-1xl">Today's Highlights</p>
+        </div>
+
+        <div class="flex flex-1 border-b border-white border-opacity-10 items-center pb-2">
+          <!-- colocar um titulo para essa div dentro de um p -->
+          
+          <div class="flex flex-1 items-center flex-col">
+            <p class="text-2xl flex items-center gap-1">
+              <i class=" text-[17px] text-blue-500 fa-solid fa-down-long"></i>
+              {{ Math.round(weatherData.daily[0].temp.min) }}&deg;
+            </p>
+            <p class="text-sm">Min</p>
+          </div>
+          <div class="flex  flex-1 items-center flex-col">
+            <p class="text-2xl flex items-center gap-1">
+              <i class=" text-[17px] text-red-500 fa-solid fa-up-long"></i>
+                {{ Math.round(weatherData.daily[0].temp.max) }}&deg;
+            </p>
+            <p class="text-sm">Max</p>
+          </div>
+          <!-- sunrise -->
+          <div class="flex flex-1 items-center flex-col">
+            <div class=" flex items-center gap-1">
+              
+              <div class="flex items-center flex-col">
+                {{
+                new Date(weatherData.daily[0].sunrise * 1000).toLocaleTimeString(
+                  "en-us",
+                  {
+                    hour: "numeric",
+                    minute: "numeric",
+                    hour12: false,
+                  }
+                )
+              }}
+              <p>Sunrise</p></div>
+              
+            </div>
+            </div>
+          <!-- sunset -->
+          <div class="flex flex-1 items-center flex-col">
+            <div class=" flex items-center gap-1">
+              
+              <div class="flex items-center flex-col">
+                {{
+                new Date(weatherData.daily[0].sunset * 1000).toLocaleTimeString(
+                  "en-us",
+                  {
+                    hour: "numeric",
+                    minute: "numeric",
+                    hour12: false,
+                  }
+                )
+              }}
+              <p>Sunset</p></div>
+              
+            </div>
+            </div>
+
+        </div>
+
+        <div class="flex flex-1 border-b border-white border-opacity-10 items-center pb-2">
+          <div class="flex flex-col flex-1 items-center">
+            <p class="text-2xl">
+              {{ Math.round(weatherData.daily[0].temp.morn) }}&deg;
+            </p>
+            <p class="text-sm">Morning</p>
+          </div>
+          <div class="flex flex-col flex-1 items-center">
+            <p class="text-2xl">
+              {{ Math.round(weatherData.daily[0].temp.day) }}&deg;
+            </p>
+            <p class="text-sm">Day</p>
+          </div>
+          <div class="flex flex-col flex-1 items-center">
+            <p class="text-2xl">
+              {{ Math.round(weatherData.daily[0].temp.eve) }}&deg;
+            </p>
+            <p class="text-sm">Evening</p>
+          </div>
+          <div class="flex flex-col flex-1 items-center">
+            <p class="text-2xl">
+              {{ Math.round(weatherData.daily[0].temp.night) }}&deg;
+            </p>
+            <p class="text-sm">Night</p>
+          </div>
+          
+        </div>
+        <div class="flex flex-1 items-center pb-2">
+
+          <div v-if="weatherData.daily[0].pop || weatherData.daily[0].pop > -1" class="flex flex-col flex-1 items-center">
+            <p class="text-2xl">
+              {{ Math.round(weatherData.daily[0].pop * 100) }}%
+            </p>
+            <p class="text-sm">Chance of Rain</p>
+          </div>
+
+          <div class="flex flex-col flex-1 items-center">
+            <p class="text-2xl">
+              {{ Math.round(weatherData.daily[0].clouds) }}%
+            </p>
+            <p class="text-sm">Clouds</p>
+          </div>
+
+          <div class="flex flex-col flex-1 items-center">
+              <p class="text-2xl">
+                {{ Math.round(weatherData.daily[0].humidity) }}%
+              </p>
+              <p class="text-sm">Humidity</p>
+          </div>
+          <div class="flex flex-col flex-1 items-center">
+            <div class="flex items-center gap-1">
+              <p class="text-2xl">
+              {{ Math.round(weatherData.daily[0].wind_speed) }} 
+            </p>
+            <p>mph</p>
+            </div>
+            <p class="text-sm">Wind</p>
+          </div>
+        </div>
+      </div>
       
     </div>
     <hr class=" border-white border-opacity-10 border w-full">
@@ -121,7 +263,7 @@
   }
 
   const weekWeather = {
-    title: 'Daily Weather',
+    title: 'Week Weather',
     data: weatherData.daily.map((day) => {
       return {
         time: new Date(day.dt * 1000).toLocaleDateString(
@@ -160,4 +302,5 @@
     width: 4px;
     height: 10px;
   }
+  
 </style>
