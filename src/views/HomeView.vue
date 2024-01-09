@@ -30,6 +30,11 @@
         </template>
       </ul>
     </div>
+    <div class="flex mb-4 w-full">
+      <Suspense>
+        <CurrentLocation v-if="hasGeoPermission" :coords="coords"/>
+      </Suspense>
+    </div>
     <div class="flex flex-col gap-4">
       <Suspense>
         <CityList/>
@@ -46,7 +51,8 @@
   import axios from 'axios'
   import { useRouter } from 'vue-router'
   import CityList from '@/components/CityList.vue';
-import CityCardSkeleton from '@/components/CityCardSkeleton.vue';
+  import CityCardSkeleton from '@/components/CityCardSkeleton.vue';
+  import CurrentLocation from '@/components/CurrentLocation.vue';
 
   const serachQuery = ref('');
   const queryTimeout = ref(null);
@@ -99,4 +105,23 @@ import CityCardSkeleton from '@/components/CityCardSkeleton.vue';
       mapboxSearchResults.value = null;
     }, 300);
   }
+
+  const hasGeoPermission = ref(false);
+  const coords = ref(null);
+
+  const getGeolocation = async () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition( async (position) => {
+        const { latitude, longitude } = position.coords;
+        coords.value = {lat: latitude, lng: longitude};
+        hasGeoPermission.value = true;
+      }, (error) => {
+        console.log(error);
+      });
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  }
+
+  getGeolocation();
 </script>

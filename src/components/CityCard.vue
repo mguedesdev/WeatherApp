@@ -17,17 +17,10 @@
       <p class="text-3xl self-end">
         {{ Math.round(city.weather.main.temp) }}&deg;
       </p>
-      <div class="flex gap-2">
-        <span class="text-xs">
-          H:
-          {{ Math.round(city.weather.main.temp_max) }}&deg;
-        </span>
-        <span class="text-xs">
-          L:
-          {{ Math.round(city.weather.main.temp_min) }}&deg;
-        </span>
+      <div class="flex gap-2 flex-1 justify-end">
+        <p class=""><i class=" text-xs text-red-500 fa-solid fa-up-long"></i> {{ Math.round(city.weather.main.temp_max) }}&deg;</p>
+        <p class=""><i class=" text-xs text-blue-500 fa-solid fa-down-long"></i> {{ Math.round(city.weather.main.temp_min) }}&deg;</p>
       </div>
-      
     </div>
   </div>
 </template>
