@@ -1,32 +1,35 @@
 <template>
-  <div v-if="weatherData && weatherData.data" @click="goToCityView" class="flex flex-col justify-center items-center w-full">
-    <div class="flex flex-col py-6 px-3 bg-weather-secondary rounded-md shadow-md cursor-pointer w-full">
+  <div v-if="weatherData && weatherData.data" @click="goToCityView" class="flex flex-col  w-full cursor-pointer">
+    <h1 class="text-xs mb-1">Current Location</h1> 
+    <div class="flex flex-col py-6 px-3 bg-weather-secondary hover:bg-[#3D5476] rounded-md cursor-pointer w-full transition-all">
+
       <div class="flex">
-      <div class="flex flex-col flex-1">
-        <div class="flex gap-2">
-          <h2 class="text-3xl">{{ weatherData.data.name }} </h2>
-          <img
-            class="w-[30px] h-auto"
-            :src="`http://openweathermap.org/img/wn/${weatherData.data.weather[0].icon}@2x.png`"
-          />
+        <div class="flex flex-col flex-1">
+          <div class="flex gap-2">
+            <h2 class="text-3xl">{{ weatherData.data.name }} </h2>
+            <img
+              class="w-[30px] h-auto"
+              :src="`http://openweathermap.org/img/wn/${weatherData.data.weather[0].icon}@2x.png`"
+            />
+          </div>
+          <h3 class="capitalize">{{ weatherData.data.weather[0].description }}</h3>
         </div>
-        <h3 class="capitalize">{{ weatherData.data.weather[0].description }}</h3>
+        <div class="flex flex-col gap-2">
+          <p class="text-3xl self-end">
+            {{ Math.round(weatherData.data.main.temp) }}&deg;
+          </p>
+          <div v-if="weatherDataFull && weatherDataFull.data" class="flex gap-2 flex-1 justify-end">
+            <p class=""><i class="text-xs text-red-500 fa-solid fa-up-long"></i> {{ Math.round(weatherDataFull.data.daily[0].temp.max) }}&deg;</p>
+            <p class=""><i class="text-xs text-blue-500 fa-solid fa-down-long"></i> {{ Math.round(weatherDataFull.data.daily[0].temp.min) }}&deg;</p>
+          </div>
+        </div>
       </div>
 
-      <div class="flex flex-col gap-2">
-        <p class="text-3xl self-end">
-          {{ Math.round(weatherData.data.main.temp) }}&deg;
-        </p>
-        <div class="flex gap-2 flex-1 justify-end">
-          <p class=""><i class=" text-xs text-red-500 fa-solid fa-up-long"></i> {{ Math.round(weatherData.data.main.temp_max) }}&deg;</p>
-          <p class=""><i class=" text-xs text-blue-500 fa-solid fa-down-long"></i> {{ Math.round(weatherData.data.main.temp_min) }}&deg;</p>
-        </div>
-      </div>
-      </div>
       <div class="flex flex-col border-t-2 border-white border-opacity-10 mt-2">
         <p class="mt-3">Alerts</p>
         <p class="text-xs" v-html="descriptionAlerts"></p>
       </div>
+
     </div>
   </div>  
 </template>
@@ -61,19 +64,20 @@
       );
 
       if (weatherDataFull.value.data.alerts && weatherDataFull.value.data.alerts[0]) {
-        descriptionAlerts.value = weatherDataFull.value.data.alerts[0].description.replace(/\./g, '.<br/>');
+        let description = weatherDataFull.value.data.alerts[0].description;
+        let sentences = description.split('.');
+        sentences.shift(); // remove first sentence
+        descriptionAlerts.value = sentences.join('.<br/>');
       }
 
       console.log('----------------------------------');
-      console.log(weatherDataFull.value.data);
+      console.log(weatherDataFull.value);
       console.log('----------------------------------');
 
     } catch (error) {
       console.log(error);
     }
   }
-
-  
 
   const goToCityView = () => {
     router.push({

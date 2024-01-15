@@ -6,7 +6,7 @@
 
         <div
           v-if="index > 0"
-          :class="{ 'flex items-center border-t border-white border-opacity-10 cursor-pointer': true,
+          :class="{ 'hover:bg-white hover:bg-opacity-10 flex items-center border-t border-white border-opacity-10 cursor-pointer': true,
           'border-b': index === weatherData.daily.length - 1}"
           @click="toggleDetails(day)"
         >
@@ -45,34 +45,34 @@
           <div class="flex flex-1 bg-weather-secondary m-5 flex-col overflow-hidden">
             <div class="flex justify-between items-center">
               <p class="text-lg">Details</p>
-              <p class="text-lg cursor-pointer" @click="toggleDetails(day)">Close</p>
+              
             </div>
-            <div class="flex flex-col gap-2 mt-4">
-              <div class="flex justify-between">
+            <div class="flex flex-col gap-2 mt-4 ">
+              <div class="flex justify-between border-b border-white border-opacity-10">
                 <p>Humidity</p>
                 <p>{{ day.humidity }}%</p>
               </div>
-              <div class="flex justify-between">
+              <div class="flex justify-between border-b border-white border-opacity-10">
                 <p>Pressure</p>
                 <p>{{ day.pressure }} hPa</p>
               </div>
-              <div class="flex justify-between">
+              <div class="flex justify-between border-b border-white border-opacity-10">
                 <p>Wind</p>
                 <p>{{ day.wind_speed }} m/s</p>
               </div>
-              <div class="flex justify-between">
+              <div class="flex justify-between border-b border-white border-opacity-10">
                 <p>Clouds</p>
                 <p>{{ day.clouds }}%</p>
               </div>
-              <div class="flex justify-between">
+              <div class="flex justify-between border-b border-white border-opacity-10">
                 <p>UV Index</p>
                 <p>{{ day.uvi }}</p>
               </div>
-              <div class="flex justify-between">
+              <div class="flex justify-between border-b border-white border-opacity-10">
                 <p>Sunrise</p>
                 <p>{{ new Date(day.sunrise * 1000).toLocaleTimeString() }}</p>
               </div>
-              <div class="flex justify-between">
+              <div class="flex justify-between border-b border-white border-opacity-10">
                 <p>Sunset</p>
                 <p>{{ new Date(day.sunset * 1000).toLocaleTimeString() }}</p>
               </div>
