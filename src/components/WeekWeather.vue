@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-screen-md w-full py-12">
+  <div class="max-w-screen-md w-full sm:py-12 py-0">
     <div class="mx-8 text-white">
       <h2 class="mb-4 text-lg">Week Weather</h2>
       <template v-for="(day, index) in weatherData.daily" :key="day.dt">

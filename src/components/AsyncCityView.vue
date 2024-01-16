@@ -6,9 +6,9 @@
         You are currently previewing this city, click the "+" icon to start tracking this city.
       </p>
     </div>
-    <div class="flex max-w-screen-md w-full text-white py-12">
+    <div class="flex sm:flex-row flex-col max-w-screen-md w-full text-white sm:py-12 py-7 ">
       <!-- Current Weather -->
-      <div class=" w-[50%] flex flex-col flex-1 items-center ml-8 mr-4">
+      <div class="sm:w-[50%] w-full flex flex-col flex-1 items-center sm:ml-8 sm:mr-4 mb-6 sm:mb-0">
         <div class="flex flex-col flex-1 items-center">
           <h1 class="text-4xl mb-2">{{ route.params.city }}</h1>
           <p class="text-sm mb-4">
@@ -64,7 +64,7 @@
       
       <!-- More infos -->
 
-      <div class="w-[53%] flex flex-col border-l border-gray-400 pl-6 mr-8 gap-5">
+      <div class="sm:w-[53%] w-full flex flex-col sm:border-l border-gray-400 sm:pl-6 px-8 sm:mr-8 gap-5">
         <p>Today's Highlights</p>
         <div class="flex flex-1 border-b border-white border-opacity-10 items-center pb-2">
           <div class="flex flex-1 items-center flex-col">
@@ -72,21 +72,21 @@
               <i class=" text-[17px] text-blue-500 fa-solid fa-down-long"></i>
               {{ Math.round(weatherData.daily[0].temp.min) }}&deg;
             </p>
-            <p class="text-sm">Min</p>
+            <p class="sm:text-sm text-xs">Min</p>
           </div>
           <div class="flex  flex-1 items-center flex-col">
             <p class="text-2xl flex items-center gap-1">
               <i class=" text-[17px] text-red-500 fa-solid fa-up-long"></i>
                 {{ Math.round(weatherData.daily[0].temp.max) }}&deg;
             </p>
-            <p class="text-sm">Max</p>
+            <p class="sm:text-sm text-xs">Max</p>
           </div>
           <!-- sunrise -->
           <div class="flex flex-1 items-center flex-col">
             <div class=" flex items-center gap-1">
               
               <div class="flex items-center flex-col">
-                <p class=" text-xl">{{
+                <p class="text-xl">{{
                 new Date(weatherData.daily[0].sunrise * 1000).toLocaleTimeString(
                   "en-us",
                   {
@@ -97,7 +97,7 @@
                 )
               }}
               </p>
-              <p class="text-sm">Sunrise</p></div>
+              <p class="sm:text-sm text-xs">Sunrise</p></div>
               
             </div>
             </div>
@@ -106,7 +106,7 @@
             <div class=" flex items-center gap-1">
               
               <div class="flex items-center flex-col">
-                <p class=" text-xl">{{
+                <p class="text-xl">{{
                 new Date(weatherData.daily[0].sunset * 1000).toLocaleTimeString(
                   "en-us",
                   {
@@ -117,7 +117,7 @@
                 )
               }}
               </p>
-              <p class="text-sm">Sunset</p></div>
+              <p class="sm:text-sm text-xs">Sunset</p></div>
               
             </div>
             </div>
@@ -129,25 +129,25 @@
             <p class="text-2xl">
               {{ Math.round(weatherData.daily[0].temp.morn) }}&deg;
             </p>
-            <p class="text-sm">Morning</p>
+            <p class="sm:text-sm text-xs">Morning</p>
           </div>
           <div class="flex flex-col flex-1 items-center">
             <p class="text-2xl">
               {{ Math.round(weatherData.daily[0].temp.day) }}&deg;
             </p>
-            <p class="text-sm">Day</p>
+            <p class="sm:text-sm text-xs">Day</p>
           </div>
           <div class="flex flex-col flex-1 items-center">
             <p class="text-2xl">
               {{ Math.round(weatherData.daily[0].temp.eve) }}&deg;
             </p>
-            <p class="text-sm">Evening</p>
+            <p class="sm:text-sm text-xs">Evening</p>
           </div>
           <div class="flex flex-col flex-1 items-center">
             <p class="text-2xl">
               {{ Math.round(weatherData.daily[0].temp.night) }}&deg;
             </p>
-            <p class="text-sm">Night</p>
+            <p class="sm:text-sm text-xs">Night</p>
           </div>
           
         </div>
@@ -157,30 +157,30 @@
             <p class="text-2xl">
               {{ Math.round(weatherData.daily[0].pop * 100) }}%
             </p>
-            <p class="text-sm">Chance of Rain</p>
+            <p class="sm:text-sm text-xs text-center">Chance Rain</p>
           </div>
 
           <div class="flex flex-col flex-1 items-center">
             <p class="text-2xl">
               {{ Math.round(weatherData.daily[0].clouds) }}%
             </p>
-            <p class="text-sm">Clouds</p>
+            <p class="sm:text-sm text-xs">Clouds</p>
           </div>
 
           <div class="flex flex-col flex-1 items-center">
               <p class="text-2xl">
                 {{ Math.round(weatherData.daily[0].humidity) }}%
               </p>
-              <p class="text-sm">Humidity</p>
+              <p class="sm:text-sm text-xs">Humidity</p>
           </div>
           <div class="flex flex-col flex-1 items-center">
             <div class="flex items-center gap-1">
               <p class="text-2xl">
               {{ Math.round(weatherData.daily[0].wind_speed) }} 
             </p>
-            <p class="text-sm">mph</p>
+            <p class="sm:text-sm text-xs">mph</p>
             </div>
-            <p class="text-sm">Wind</p>
+            <p class="sm:text-sm text-xs">Wind</p>
           </div>
         </div>
       </div>

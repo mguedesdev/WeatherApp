@@ -35,7 +35,7 @@
         <CurrentLocation v-if="hasGeoPermission" :coords="coords"/>
       </Suspense>
     </div>
-    <div class="flex flex-col gap-4">
+    <div class="flex flex-col">
       <Suspense>
         <CityList/>
         <template #fallback>

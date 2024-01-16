@@ -25,7 +25,7 @@
         </div>
       </div>
 
-      <div class="flex flex-col border-t-2 border-white border-opacity-10 mt-2">
+      <div v-if="descriptionAlerts" class="flex flex-col border-t-2 border-white border-opacity-10 mt-2">
         <p class="mt-3">Alerts</p>
         <p class="text-xs" v-html="descriptionAlerts"></p>
       </div>

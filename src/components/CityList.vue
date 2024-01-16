@@ -1,5 +1,6 @@
 <template>
-  <div v-for="city in savedCities" :key="city.id">
+  <h1 v-if="savedCities.length > 0" class="text-xs mb-1">Saved Location</h1> 
+  <div v-for="city in savedCities" :key="city.id" class="">
     <CityCard :city="city" @click="goToCityView(city)"/>
   </div>
 
