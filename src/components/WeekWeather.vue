@@ -1,12 +1,12 @@
 <template>
-  <div class="max-w-screen-md w-full sm:py-12 py-0">
+  <div class="max-w-screen-md w-full sm:py-10 py-0">
     <div class="mx-8 text-white">
       <h2 class="mb-4 text-lg">Week Weather</h2>
       <template v-for="(day, index) in weatherData.daily" :key="day.dt">
 
         <div
           v-if="index > 0"
-          :class="{ 'hover:bg-white hover:bg-opacity-10 flex items-center border-t border-white border-opacity-10 cursor-pointer': true,
+          :class="{ 'hover:bg-weather-secondary duration-200 hover:bg-opacity-25 flex items-center border-t border-white border-opacity-10 cursor-pointer': true,
           'border-b': index === weatherData.daily.length - 1}"
           @click="toggleDetails(day)"
         >

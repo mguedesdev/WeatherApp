@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex py-6 px-3 bg-weather-secondary hover:bg-[#3D5476] rounded-md shadow-md cursor-pointer mb-4"
+    class="flex py-6 px-3 bg-weather-secondary hover:bg-[#3D5476] duration-150 rounded-md shadow-md cursor-pointer mb-4"
   >
     <div class="flex flex-col flex-1">
       <div class="flex gap-2">

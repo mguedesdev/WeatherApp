@@ -68,15 +68,15 @@
         <p>Today's Highlights</p>
         <div class="flex flex-1 border-b border-white border-opacity-10 items-center pb-2">
           <div class="flex flex-1 items-center flex-col">
-            <p class="text-2xl flex items-center gap-1">
-              <i class=" text-[17px] text-blue-500 fa-solid fa-down-long"></i>
+            <p class="text-xl flex items-center gap-1">
+              <i class="text-xs text-blue-500 fa-solid fa-down-long"></i>
               {{ Math.round(weatherData.daily[0].temp.min) }}&deg;
             </p>
             <p class="sm:text-sm text-xs">Min</p>
           </div>
-          <div class="flex  flex-1 items-center flex-col">
-            <p class="text-2xl flex items-center gap-1">
-              <i class=" text-[17px] text-red-500 fa-solid fa-up-long"></i>
+          <div class="flex flex-1 items-center flex-col">
+            <p class="text-xl flex items-center gap-1">
+              <i class="text-xs text-red-500 fa-solid fa-up-long"></i>
                 {{ Math.round(weatherData.daily[0].temp.max) }}&deg;
             </p>
             <p class="sm:text-sm text-xs">Max</p>
@@ -126,25 +126,25 @@
 
         <div class="flex flex-1 border-b border-white border-opacity-10 items-center pb-2">
           <div class="flex flex-col flex-1 items-center">
-            <p class="text-2xl">
+            <p class="text-xl">
               {{ Math.round(weatherData.daily[0].temp.morn) }}&deg;
             </p>
             <p class="sm:text-sm text-xs">Morning</p>
           </div>
           <div class="flex flex-col flex-1 items-center">
-            <p class="text-2xl">
+            <p class="text-xl">
               {{ Math.round(weatherData.daily[0].temp.day) }}&deg;
             </p>
             <p class="sm:text-sm text-xs">Day</p>
           </div>
           <div class="flex flex-col flex-1 items-center">
-            <p class="text-2xl">
+            <p class="text-xl">
               {{ Math.round(weatherData.daily[0].temp.eve) }}&deg;
             </p>
             <p class="sm:text-sm text-xs">Evening</p>
           </div>
           <div class="flex flex-col flex-1 items-center">
-            <p class="text-2xl">
+            <p class="text-xl">
               {{ Math.round(weatherData.daily[0].temp.night) }}&deg;
             </p>
             <p class="sm:text-sm text-xs">Night</p>
@@ -154,28 +154,28 @@
         <div class="flex flex-1 items-center pb-2">
 
           <div v-if="weatherData.daily[0].pop || weatherData.daily[0].pop > -1" class="flex flex-col flex-1 items-center">
-            <p class="text-2xl">
+            <p class="text-xl">
               {{ Math.round(weatherData.daily[0].pop * 100) }}%
             </p>
             <p class="sm:text-sm text-xs text-center">Chance Rain</p>
           </div>
 
           <div class="flex flex-col flex-1 items-center">
-            <p class="text-2xl">
+            <p class="text-xl">
               {{ Math.round(weatherData.daily[0].clouds) }}%
             </p>
             <p class="sm:text-sm text-xs">Clouds</p>
           </div>
 
           <div class="flex flex-col flex-1 items-center">
-              <p class="text-2xl">
+              <p class="text-xl">
                 {{ Math.round(weatherData.daily[0].humidity) }}%
               </p>
               <p class="sm:text-sm text-xs">Humidity</p>
           </div>
           <div class="flex flex-col flex-1 items-center">
             <div class="flex items-center gap-1">
-              <p class="text-2xl">
+              <p class="text-xl">
               {{ Math.round(weatherData.daily[0].wind_speed) }} 
             </p>
             <p class="sm:text-sm text-xs">mph</p>
