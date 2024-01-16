@@ -3,8 +3,26 @@ import App from './App.vue'
 import router from './router'
 import './assets/tailwind.css'
 
-const app = createApp(App)
+import { createI18n } from 'vue-i18n';
+import store from './store';
 
-app.use(router)
+import en from './locales/en.json';
+import ptBr from './locales/ptBr.json';
+
+const i18n = createI18n({
+  legacy: false,
+  locale: 'en',
+  fallbackLocale: 'en', 
+  messages: {
+    en,
+    ptBr
+  }
+});
+
+const app = createApp(App);
+
+app.use(router);
+app.use(i18n);
+app.use(store);
 
 app.mount('#app')

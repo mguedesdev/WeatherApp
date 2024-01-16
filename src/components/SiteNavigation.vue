@@ -8,7 +8,15 @@
         </div>
       </RouterLink>
 
+      
+      <button @click="toggleLanguage">Mudar Idioma</button>
+      <h1>{{ $t('welcome_message') }}</h1>
       <div class="flex gap-3 flex-1 justify-end">
+        <img 
+          @click="toggleLanguage" 
+          class="cursor-pointer w-7 h-auto" 
+          :src="currentLanguage !== 'en' ? 'src/assets/brFlag.png' : 'src/assets/usaFlag.png'"
+        />
         <i 
         class="fa-solid fa-circle-info text-xl hover:text-weather-secondary duration-150 cursor-pointer"
         @click="toggleModal"></i>
@@ -55,11 +63,12 @@
   </header>
 </template>
 
-
 <script setup>
   import { RouterLink, useRoute, useRouter } from "vue-router";
   import { uid } from "uid";
   import { ref } from "vue";
+  import { useStore } from 'vuex';
+  import { computed } from 'vue';
   import BaseModal from "./BaseModal.vue";
 
   const route = useRoute();
@@ -96,4 +105,25 @@
     modalActive.value = !modalActive.value;
   }
 
+  import { useI18n } from 'vue-i18n';
+  const { t, locale } = useI18n();
+  const store = useStore();
+  let currentLanguage = 'ptBr';
+  console.log(currentLanguage)
+
+  const toggleLanguage = () => {
+    currentLanguage = store.state.language;
+    if (currentLanguage === 'en') {
+      store.commit('SET_LANGUAGE', 'ptBr');
+      store.commit('SET_UNIT', 'metric');
+      locale.value = 'ptBr'; 
+    } else {
+      store.commit('SET_LANGUAGE', 'en');
+      store.commit('SET_UNIT', 'imperial');
+      locale.value = 'en'; 
+    }
+    console.log(currentLanguage)
+  };
+
 </script>
+

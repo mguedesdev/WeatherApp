@@ -13,7 +13,9 @@
     "tailwind-scrollbar": "^3.0.5",
     "uid": "^2.0.2",
     "vue": "^3.3.11",
-    "vue-router": "^4.2.5"
+    "vue-i18n": "^9.9.0",
+    "vue-router": "^4.2.5",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.2",
