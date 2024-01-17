@@ -1,0 +1,37 @@
+{
+  "about_title": "Sobre:",
+  "about_description": "The Local Weather permite que você acompanhe o clima atual e futuro das cidades de sua escolha.",
+  "how_it_works": "Como funciona:",
+  "search_city": "Pesquise sua cidade inserindo o nome na barra de pesquisa.",
+  "select_city": "Selecione uma cidade entre os resultados, isso te levará ao clima atual para sua seleção.",
+  "track_city": "Rastreie a cidade clicando no ícone de \"+\" no canto superior direito. Isso salvará a cidade para visualização posterior na página inicial.",
+  "removing_city": "Removendo uma cidade",
+  "remove_city_description": "Se você não deseja mais rastrear uma cidade, basta selecionar a cidade na página inicial. Na parte inferior da página, haverá uma opção para excluir a cidade.",
+ 
+  "search_placeholder": "Procure por uma cidade ou estado",
+  "search_error": "Desculpe, algo deu errado, por favor tente novamente.",
+  "no_results": "Nenhum resultado corresponde à sua pesquisa, tente uma cidade ou estado diferente.",
+
+  "saved_locations": "Localizações Salvas",
+  "no_locations_added": "Nenhuma localização adicionada. Para começar a rastrear um local, procure no campo acima.",
+
+  "current_location": "Localização Atual",
+  "alerts": "Alertas",
+
+  "feels_like": "S. Térmica",
+  "min": "Mín",
+  "max": "Máx",
+  "sunrise": "Nascer do Sol",
+  "sunset": "Pôr do Sol",
+  "morning": "Manhã",
+  "day": "Dia",
+  "evening": "Tarde",
+  "night": "Noite",
+  "chance_rain": "Chuva",
+  "clouds": "Nuvens",
+  "humidity": "Umidade",
+  "wind": "Vento",
+  "remove_city": "Remover Cidade",
+  "todays_highlights": "Destaques de Hoje",
+  "preview_city_message": "Você está visualizando esta cidade, clique no ícone \"+\" para começar a rastreá-la."
+}

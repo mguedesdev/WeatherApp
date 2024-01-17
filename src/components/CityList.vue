@@ -1,12 +1,11 @@
 <template>
-  <h1 v-if="savedCities.length > 0" class="text-xs mb-1">Saved Location</h1> 
+  <h1 v-if="savedCities.length > 0" class="text-xs mb-1">{{ $t('saved_locations') }}</h1> 
   <div v-for="city in savedCities" :key="city.id" class="">
     <CityCard :city="city" @click="goToCityView(city)"/>
   </div>
 
   <p v-if="savedCities.length === 0">
-    No locations added. To start tracking a location, search in
-    the field above.
+    {{ $t('no_locations_added') }}
   </p>
 </template>
 
@@ -15,6 +14,10 @@
   import axios from 'axios';
   import CityCard from './CityCard.vue';
   import { useRouter } from 'vue-router';
+
+  import { useI18n } from 'vue-i18n';
+
+  const { t } = useI18n();
 
   const router = useRouter();
 

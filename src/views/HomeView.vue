@@ -1,31 +1,31 @@
 <template>
-  <main class=" container text-white">
-    <div class=" pt-4 mb-8 relative">
+  <main class="container text-white">
+    <div class="pt-4 mb-8 relative">
       <input 
-      type="text"
-      v-model="serachQuery"
-      @input="getSearchRsults"
-      placeholder="Search for a city or state"
-      class=" py-2 px-1 w-full bg-transparent border-b focus:border-weather-secondary focus:outline-none focus:shadow-[0px_1px_0_0#004E71]"
+        type="text"
+        v-model="serachQuery"
+        @input="getSearchRsults"
+        :placeholder="$t('search_placeholder')"
+        class="py-2 px-1 w-full bg-transparent border-b focus:border-weather-secondary focus:outline-none focus:shadow-[0px_1px_0_0#004E71]"
       >
       <ul 
-      class="absolute bg-weather-secondary text-white w-full shadow-md py-2 px-1 top-[66px]"
-      v-if="mapboxSearchResults"
+        class="absolute bg-weather-secondary text-white w-full shadow-md py-2 px-1 top-[66px]"
+        v-if="mapboxSearchResults"
       >
         <p v-if="searchError">
-          Sorry, something went wrong, please try again.
+          {{ $t('search_error') }}
         </p>
         <p v-if="mapboxSearchResults.length === 0">
-          No results match your search, try a different city or state.
+          {{ $t('no_results') }}
         </p>
         <template v-else>
           <li
-          v-for="searchResult in mapboxSearchResults"
-          :key="searchResult.id"
-          class="py-2 cursor-pointer hover:bg-weather-primary duration-100"
-          @click="previewCity(searchResult)"
+            v-for="searchResult in mapboxSearchResults"
+            :key="searchResult.id"
+            class="py-2 cursor-pointer hover:bg-weather-primary duration-100"
+            @click="previewCity(searchResult)"
           >
-            {{searchResult.place_name}}
+            {{ searchResult.place_name }}
           </li>
         </template>
       </ul>
@@ -53,6 +53,10 @@
   import CityList from '@/components/CityList.vue';
   import CityCardSkeleton from '@/components/CityCardSkeleton.vue';
   import CurrentLocation from '@/components/CurrentLocation.vue';
+
+  import { useI18n } from 'vue-i18n';
+
+  const { t } = useI18n();
 
   const serachQuery = ref('');
   const queryTimeout = ref(null);

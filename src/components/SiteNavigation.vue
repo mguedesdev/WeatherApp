@@ -7,15 +7,13 @@
           <p class="text-2xl">The Local Weather</p>
         </div>
       </RouterLink>
-
       
-      <button @click="toggleLanguage">Mudar Idioma</button>
-      <h1>{{ $t('welcome_message') }}</h1>
+      <!-- <h1>{{ $t('welcome_message') }}</h1> -->
       <div class="flex gap-3 flex-1 justify-end">
         <img 
           @click="toggleLanguage" 
           class="cursor-pointer w-7 h-auto" 
-          :src="currentLanguage !== 'en' ? 'src/assets/brFlag.png' : 'src/assets/usaFlag.png'"
+          :src="flagImagePath"
         />
         <i 
         class="fa-solid fa-circle-info text-xl hover:text-weather-secondary duration-150 cursor-pointer"
@@ -28,33 +26,26 @@
 
       <BaseModal :modalActive="modalActive" @close-modal="toggleModal"> 
         <div class="text-black">
-          <h1 class="text-2xl mb-1">About:</h1>
+          <h1 class="text-2xl mb-1">{{ $t('about_title') }}</h1>
           <p class="mb-4">
-            The Local Weather allows you to track the current and
-            future weather of cities of your choosing.
+            {{ $t('about_description') }}
           </p>
-          <h2 class="text-2xl">How it works:</h2>
+          <h2 class="text-2xl">{{ $t('how_it_works') }}</h2>
           <ol class="list-decimal list-inside mb-4">
             <li>
-              Search for your city by entering the name into the
-              search bar.
+              {{ $t('search_city') }}
             </li>
             <li>
-              Select a city within the results, this will take
-              you to the current weather for your selection.
+              {{ $t('select_city') }}
             </li>
             <li>
-              Track the city by clicking on the "+" icon in the
-              top right. This will save the city to view at a
-              later time on the home page.
+              {{ $t('track_city') }}
             </li>
           </ol>
 
-          <h2 class="text-2xl">Removing a city</h2>
+          <h2 class="text-2xl">{{ $t('removing_city') }}</h2>
           <p>
-            If you no longer wish to track a city, simply select
-            the city within the home page. At the bottom of the
-            page, there will be am option to delete the city.
+            {{ $t('remove_city_description') }}
           </p>
         </div>
       </BaseModal>
@@ -114,9 +105,9 @@
   const toggleLanguage = () => {
     currentLanguage = store.state.language;
     if (currentLanguage === 'en') {
-      store.commit('SET_LANGUAGE', 'ptBr');
+      store.commit('SET_LANGUAGE', 'pt_br');
       store.commit('SET_UNIT', 'metric');
-      locale.value = 'ptBr'; 
+      locale.value = 'pt_br'; 
     } else {
       store.commit('SET_LANGUAGE', 'en');
       store.commit('SET_UNIT', 'imperial');
@@ -124,6 +115,10 @@
     }
     console.log(currentLanguage)
   };
+
+  const flagImagePath = computed(() => {
+    return store.state.language === 'en' ? '../../src/assets/brFlag.png' : '../../src/assets/usaFlag.png';
+  });
 
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div v-if="weatherData && weatherData.data" @click="goToCityView" class="flex flex-col  w-full cursor-pointer">
-    <h1 class="text-xs mb-1">Current Location</h1> 
+    <h1 class="text-xs mb-1">{{ $t('current_location') }}</h1> 
     <div class="flex flex-col py-6 px-3 bg-weather-secondary hover:bg-[#3D5476] rounded-md cursor-pointer w-full transition-all">
 
       <div class="flex">
@@ -26,7 +26,7 @@
       </div>
 
       <div v-if="descriptionAlerts" class="flex flex-col border-t-2 border-white border-opacity-10 mt-2">
-        <p class="mt-3">Alerts</p>
+        <p class="mt-3">{{ $t('alerts') }}</p>
         <p class="text-xs" v-html="descriptionAlerts"></p>
       </div>
 
@@ -38,6 +38,10 @@
   import { defineProps, ref, watchEffect } from 'vue';
   import axios from 'axios';
   import { useRouter } from 'vue-router';
+
+  import { useI18n } from 'vue-i18n';
+
+  const { t } = useI18n();
 
   const router = useRouter();
 
