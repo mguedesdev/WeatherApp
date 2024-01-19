@@ -61,6 +61,8 @@
   import { useStore } from 'vuex';
   import { computed } from 'vue';
   import BaseModal from "./BaseModal.vue";
+  import brFlag from '@/assets/brFlag.png';
+  import usaFlag from '@/assets/usaFlag.png';
 
   const route = useRoute();
   const router = useRouter();
@@ -117,10 +119,8 @@
   };
 
   const flagImagePath = computed(() => {
-  return store.state.language === 'en' 
-    ? require('@/assets/brFlag.png') 
-    : require('@/assets/usaFlag.png');
-});
+    return store.state.language === 'en' ? brFlag : usaFlag;
+  });
 
 </script>
 
