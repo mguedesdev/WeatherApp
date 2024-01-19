@@ -1,15 +1,15 @@
 
-# The Local Weather App
+# 🌤️The Local Weather App
 
   
 
-## Descrição
+## 📑Descrição
 
 The Local Weather App é um aplicativo de previsão do tempo construído com Vue.js e Tailwind CSS. Ele oferece previsões do tempo atual e permite pesquisar e visualizar o tempo em diferentes cidades. O aplicativo utiliza APIs do OpenWeather e Mapbox para obter dados meteorológicos e informações de localização.
 
   
 
-## Características
+## 💡Características
 
 - Previsão do tempo atual com base na localização do usuário (usando geolocalização).
 
@@ -23,7 +23,7 @@ The Local Weather App é um aplicativo de previsão do tempo construído com Vue
 
   
 
-## Tecnologias Utilizadas
+## 🖥️Tecnologias Utilizadas
 
 -  **Vue.js**: Framework JavaScript progressivo para construção de interfaces de usuário.
 
@@ -39,7 +39,7 @@ The Local Weather App é um aplicativo de previsão do tempo construído com Vue
 
   
 
-## Configuração e Instalação
+## 👨‍💻Configuração e Instalação
 
 Para configurar este projeto localmente, siga os passos abaixo:
 
@@ -61,6 +61,6 @@ npm install
 npm run serve
 ```
 
-## Contribuindo
+## 📢Contribuindo
 
 Contribuições são bem-vindas! Se você tem uma sugestão de melhoria ou encontrou um bug, sinta-se à vontade para abrir uma issue ou enviar um pull request.
