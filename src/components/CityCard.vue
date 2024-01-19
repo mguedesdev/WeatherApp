@@ -15,7 +15,7 @@
               :src="`http://openweathermap.org/img/wn/${city.weather.weather[0].icon}@2x.png`"
             />
           </div>
-          <h3>{{ city.state }}</h3>
+          <h3>{{ addSpaces(city.state) }}</h3>
         </div>
 
         <div class="flex flex-col gap-2">
@@ -41,6 +41,10 @@
       default: () => {}
     }
   })
+
+  const addSpaces = (str) => {
+    return str.replace(/([A-Z])/g, ' $1').trim();
+  }
 
 </script>
 

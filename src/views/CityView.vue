@@ -2,9 +2,9 @@
   <div>
     <Suspense>
       <AsyncCityView />
-      <template #fallback>
+      <!-- <template #fallback>
         <CityViewSkeleton />
-      </template>
+      </template> -->
     </Suspense>
   </div>
 </template>

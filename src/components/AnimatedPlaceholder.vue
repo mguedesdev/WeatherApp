@@ -1,5 +1,5 @@
 <template>
-  <div class=" bg-gradient-to-r from-gray-400 animate-pulse">
+  <div class="bg-[#111c25] rounded-2xl">
     &nbsp
   </div>
 </template>
