@@ -117,8 +117,10 @@
   };
 
   const flagImagePath = computed(() => {
-    return store.state.language === 'en' ? '../../src/assets/brFlag.png' : '../../src/assets/usaFlag.png';
-  });
+  return store.state.language === 'en' 
+    ? require('@/assets/brFlag.png') 
+    : require('@/assets/usaFlag.png');
+});
 
 </script>
 
