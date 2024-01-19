@@ -148,12 +148,6 @@
     isLoadingCity.value = value;
   }
 
-  // onMounted(() => {
-  //   setTimeout(() => {
-  //     isLoading.value = false;
-  //   }, 600);
-  // })
-
 </script>
 
 
