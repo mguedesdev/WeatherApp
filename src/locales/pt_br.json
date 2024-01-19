@@ -33,5 +33,8 @@
   "wind": "Vento",
   "remove_city": "Remover Cidade",
   "todays_highlights": "Destaques de Hoje",
-  "preview_city_message": "Você está visualizando esta cidade, clique no ícone \"+\" para começar a rastreá-la."
+  "preview_city_message": "Você está visualizando esta cidade, clique no ícone \"+\" para começar a rastreá-la.",
+
+  "Week Weather": "Previsão Semanal",
+  "Hourly Weather": "Previsão por Hora"
 }

@@ -175,7 +175,7 @@
         <!-- Hourly Weather -->
         <HourlyWeather v-if="weatherData" :weatherData="hourlyWeather" />
         <!-- Daily Weather -->
-        <WeekWeather v-if="weatherData" :weatherData="weatherData" />
+        <WeekWeather v-if="weatherData" :weatherData="weatherData" :lang="store.state.language" />
         
         <div
           v-if="!route.query.preview"
@@ -198,7 +198,7 @@
 
   import { useStore } from 'vuex';
   import { useI18n } from 'vue-i18n';
-import CityViewSkeleton from './CityViewSkeleton.vue';
+  import CityViewSkeleton from './CityViewSkeleton.vue';
 
   const { t } = useI18n();
   const route = useRoute();
@@ -258,16 +258,19 @@ import CityViewSkeleton from './CityViewSkeleton.vue';
 
   watch(weatherData, (newWeatherData) => {
     if(newWeatherData && newWeatherData.hourly && newWeatherData.daily) {
-
+      
       hourlyWeather.value = {
-        title: 'Hourly Weather',
         data: newWeatherData.hourly.map((hour) => {
+          let options;
+          if (store.state.language === "en") {
+            options = { hour: "2-digit" };
+          } else {
+            options = { hour: "2-digit", minute: "2-digit" };
+          }
           return {
             time: new Date(hour.currentTime).toLocaleTimeString(
-              "en-us",
-              {
-                hour: "numeric",
-              }
+              store.state.language === "en" ? "en-US" : "pt-BR",
+              options
             ),
             temp: Math.round(hour.temp),
             feelsLike: Math.round(hour.feels_like),
@@ -275,28 +278,9 @@ import CityViewSkeleton from './CityViewSkeleton.vue';
             icon: hour.weather[0].icon,
           };
         }),
-      }
-
-      weekWeather.value = {
-        title: 'Week Weather',
-        data: newWeatherData.daily.map((day) => {
-          return {
-            time: new Date(day.dt * 1000).toLocaleDateString(
-              "en-us",
-              {
-                weekday: "long",
-              }
-            ),
-            temp: Math.round(day.temp.max),
-            tempMin: Math.round(day.temp.min),
-            tempMax: Math.round(day.temp.max),
-            feelsLike: Math.round(day.feels_like.day),
-            description: day.weather[0].description,
-            icon: day.weather[0].icon,
-          };
-        }),
-      }
-
+      };
+      
+      console.log(weekWeather.value);
     }
   });
 
@@ -319,13 +303,12 @@ import CityViewSkeleton from './CityViewSkeleton.vue';
     const options = {
       weekday: 'short',
       day: '2-digit',
-      month: 'long',
+      month: 'short',
       hour: 'numeric',
       minute: 'numeric',
-      hour12: false,
     };
 
-    return date.toLocaleDateString('en-us', options);
+    return date.toLocaleDateString(store.state.language === "en" ? "en-US" : "pt-BR", options);
   };
 
 </script>
@@ -341,7 +324,7 @@ import CityViewSkeleton from './CityViewSkeleton.vue';
 
   .page-enter-active,
   .page-leave-active {
-    transition: 0.6s ease all;
+    transition: 0.4s ease all;
 
   }
 

@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-screen-md w-full sm:py-10 py-0">
     <div class="mx-8 text-white">
-      <h2 class="mb-4 text-lg">Week Weather</h2>
+      <h2 class="mb-4 text-lg">{{ $t('Week Weather') }}</h2>
       <template v-for="(day, index) in weatherData.daily" :key="day.dt">
 
         <div
@@ -11,13 +11,7 @@
           @click="toggleDetails(day)"
         >
 
-          <p class="flex-1">{{ new Date(day.dt * 1000).toLocaleDateString(
-              "en-us",
-              {
-                weekday: "long",
-              }
-            )}}
-          </p>
+          <p class="flex-1 capitalize">{{ formatDay(day.dt) }} </p>
 
           <div class="flex justify-start items-center">
             <img
@@ -27,7 +21,7 @@
               "
               alt=""
             />
-            <p class="hidden md:block">
+            <p class="hidden md:block capitalize">
               {{ day.weather[0].description }}
             </p>
           </div>
@@ -87,10 +81,16 @@
 
 <script setup>
 import { defineProps, reactive } from "vue";
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
-defineProps({
+const props = defineProps({
   weatherData: {
     type: Object,
+    required: true,
+  },
+  lang: {
+    type: String,
     required: true,
   },
 });
@@ -102,6 +102,14 @@ const toggleDetails = (day) => {
   detailsVisibility[dateKey] = !detailsVisibility[dateKey];
 };
 
+const formatDay = (timestamp) => {
+  return new Date(timestamp * 1000).toLocaleDateString(
+    props.lang === "en" ? "en-US" : "pt-BR",
+    {
+      weekday: "long",
+    }
+  );
+};
 </script>
 
 <style scoped>

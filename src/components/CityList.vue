@@ -10,47 +10,73 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue';
   import axios from 'axios';
   import CityCard from './CityCard.vue';
   import { useRouter } from 'vue-router';
+  import { useStore } from 'vuex';
+  import { ref, watch, onMounted, defineEmits  } from 'vue';
 
   import { useI18n } from 'vue-i18n';
 
   const { t } = useI18n();
-
   const router = useRouter();
-
+  const store = useStore();
   const savedCities = ref([]);
+  const weatherData = ref([]);
+  const isLoading = ref(false);
+
+  const emit = defineEmits(['update:isLoading']);
 
   const getCities = async () => {
+    isLoading.value = true;
+    emit('update:isLoading', true);
     if(localStorage.getItem('savedCities')){
-      savedCities.value = JSON.parse(localStorage.getItem('savedCities'));
+      const savedCitiesData = localStorage.getItem('savedCities');
+      if (savedCitiesData) {
+        savedCities.value = JSON.parse(savedCitiesData);
+      }
     }
 
     const APIKey = '7efa332cf48aeb9d2d391a51027f1a71';
     const requests = [];
+    const state = store.state;
+    const units = state.unit;
+    const lang = state.language === 'en' ? 'en' : 'pt_br'
 
     savedCities.value.forEach(city =>  {
       requests.push(
         axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${city.coords.lat}&lon=${city.coords.lng}&appid=${APIKey}&units=imperial`
+          `https://api.openweathermap.org/data/2.5/weather?lat=${city.coords.lat}&lon=${city.coords.lng}&appid=${APIKey}&units=${units}&lang=${lang}`
         ));
     });
-     
-    const weatherData = await Promise.all(requests);
 
-    await new Promise((res) => setTimeout(res, 1000));
-    
-    weatherData.forEach((value, index) => {
-      savedCities.value[index].weather = value.data;
-    });
+    const responses = await Promise.all(requests);
+    if (Array.isArray(responses)) {
+      weatherData.value = responses.map(response => response.data);
+    }
 
-    console.log(weatherData);
+    if (Array.isArray(weatherData.value)) {
+      weatherData.value.forEach((value, index) => {
+        if (savedCities.value[index]) {
+          savedCities.value[index].weather = value;
+        }
+      });
+    }
+    isLoading.value = false;
+    emit('update:isLoading', false);
   }
 
-  await getCities();
-  console.log(savedCities)
+  watch(
+    () => [store.state.language, store.state.unit], 
+    async () => {
+      weatherData.value = await getCities();
+    }, 
+    { immediate: true }
+  );
+
+  onMounted(async () => {
+    await getCities();
+  });
 
   const goToCityView = (city) => {
     router.push({

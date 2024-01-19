@@ -30,31 +30,38 @@
         </template>
       </ul>
     </div>
-    <div class="flex mb-4 w-full">
-      <Suspense>
-        <CurrentLocation v-if="hasGeoPermission" :coords="coords"/>
-      </Suspense>
-    </div>
-    <div class="flex flex-col">
-      <Suspense>
-        <CityList/>
-        <template #fallback>
-          <CityCardSkeleton/>
-        </template>
-      </Suspense>
-    </div>
+    
+      <Transition name="main" mode="out-in">
+        <div v-if="isLoading && isLoadingCity" class="flex flex-col gap-4">
+          <!-- <CityCardSkeleton />
+          <CityCardSkeleton />
+          <CityCardSkeleton /> -->
+        </div>
+      </Transition>
+      <Transition name="main" mode="out-in">
+        <Suspense>
+          <div v-show="!isLoading && !isLoadingCity">
+
+              <CurrentLocation v-if="hasGeoPermission" :coords="coords" @update:isLoading="handleLoadingComplete"/>
+
+              <CityList @update:isLoading="handleLoadingCityComplete" />
+
+          </div>
+        </Suspense>
+      </Transition>
+    
   </main>
 </template>
 
 <script setup>
-  import {ref} from 'vue'
+  import {ref, onMounted} from 'vue'
   import axios from 'axios'
   import { useRouter } from 'vue-router'
   import CityList from '@/components/CityList.vue';
-  import CityCardSkeleton from '@/components/CityCardSkeleton.vue';
   import CurrentLocation from '@/components/CurrentLocation.vue';
 
   import { useI18n } from 'vue-i18n';
+  import CityCardSkeleton from '@/components/CityCardSkeleton.vue';
 
   const { t } = useI18n();
 
@@ -128,4 +135,36 @@
   }
 
   getGeolocation();
+
+  const isLoading = ref(true);
+  const isLoadingCity = ref(true);
+
+  const handleLoadingComplete = (value) => {
+    isLoading.value = value;
+    console.log(isLoading.value);
+  }
+
+  const handleLoadingCityComplete = (value) => {
+    isLoadingCity.value = value;
+  }
+
+  // onMounted(() => {
+  //   setTimeout(() => {
+  //     isLoading.value = false;
+  //   }, 600);
+  // })
+
 </script>
+
+
+<style scoped>
+  .main-enter-active,
+  .main-leave-active {
+    transition: 0.3s ease all;
+  }
+
+  .main-enter-from,
+  .main-leave-to {
+    opacity: 0;
+  }
+</style>
