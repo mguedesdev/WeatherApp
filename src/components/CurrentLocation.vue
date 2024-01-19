@@ -11,15 +11,15 @@
         <div class="flex flex-col py-6 px-3 bg-weather-secondary hover:bg-[#3D5476] rounded-md cursor-pointer w-full transition-all">
 
           <div class="flex">
-            <div class="flex flex-col flex-1">
+            <div class="flex flex-col flex-1 justify-between">
               <div class="flex gap-2">
-                <h2 class="text-3xl">{{ weatherData.data.name }} </h2>
+                <h2 class="sm:text-3xl text-2xl">{{ weatherData.data.name }} </h2>
                 <img
                   class="w-[30px] h-auto"
                   :src="`http://openweathermap.org/img/wn/${weatherData.data.weather[0].icon}@2x.png`"
                 />
               </div>
-              <h3 class="capitalize">{{ weatherData.data.weather[0].description }}</h3>
+              <h3 class="capitalize ">{{ weatherData.data.weather[0].description }}</h3>
             </div>
             <div class="flex flex-col gap-2">
               <p class="text-3xl self-end">

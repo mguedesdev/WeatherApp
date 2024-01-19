@@ -5,11 +5,11 @@
     </template>
     <template v-else>
       <div
-        class="flex py-6 px-3 bg-weather-secondary hover:bg-[#3D5476] duration-150 rounded-md shadow-md cursor-pointer mb-4"
+        class="flex sm:py-6 py-4 px-3 bg-weather-secondary hover:bg-[#3D5476] duration-150 rounded-md shadow-md cursor-pointer mb-4"
       >
-        <div class="flex flex-col flex-1">
+        <div class="flex flex-col flex-1 justify-between">
           <div class="flex gap-2">
-            <h2 class="text-3xl">{{ city.city }} </h2>
+            <h2 class="sm:text-3xl text-2xl">{{ city.city }} </h2>
             <img
               class="w-[30px] h-auto"
               :src="`http://openweathermap.org/img/wn/${city.weather.weather[0].icon}@2x.png`"
