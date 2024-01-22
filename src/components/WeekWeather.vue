@@ -38,37 +38,37 @@
           >
           <div class="flex flex-1 bg-weather-secondary m-5 flex-col overflow-hidden">
             <div class="flex justify-between items-center">
-              <p class="text-lg">Details</p>
+              <p class="text-lg">{{ $t('details') }}</p>
               
             </div>
             <div class="flex flex-col gap-2 mt-4 ">
               <div class="flex justify-between border-b border-white border-opacity-10">
-                <p>Humidity</p>
+                <p>{{ $t('humidity') }}</p>
                 <p>{{ day.humidity }}%</p>
               </div>
               <div class="flex justify-between border-b border-white border-opacity-10">
-                <p>Pressure</p>
+                <p>{{ $t('pressure') }}</p>
                 <p>{{ day.pressure }} hPa</p>
               </div>
               <div class="flex justify-between border-b border-white border-opacity-10">
-                <p>Wind</p>
+                <p>{{ $t('wind') }}</p>
                 <p>{{ day.wind_speed }} m/s</p>
               </div>
               <div class="flex justify-between border-b border-white border-opacity-10">
-                <p>Clouds</p>
+                <p>{{ $t('clouds') }}</p>
                 <p>{{ day.clouds }}%</p>
               </div>
               <div class="flex justify-between border-b border-white border-opacity-10">
-                <p>UV Index</p>
+                <p>{{ $t('uv_index') }}</p>
                 <p>{{ day.uvi }}</p>
               </div>
               <div class="flex justify-between border-b border-white border-opacity-10">
-                <p>Sunrise</p>
-                <p>{{ new Date(day.sunrise * 1000).toLocaleTimeString() }}</p>
+                <p>{{ $t('sunrise') }}</p>
+                <p>{{ formatHour(day.sunrise) }}</p>
               </div>
               <div class="flex justify-between border-b border-white border-opacity-10">
-                <p>Sunset</p>
-                <p>{{ new Date(day.sunset * 1000).toLocaleTimeString() }}</p>
+                <p>{{ $t('sunset') }}</p>
+                <p>{{ formatHour(day.sunset) }}</p>
               </div>
             </div>
             </div>
@@ -80,7 +80,7 @@
 </template>
 
 <script setup>
-import { defineProps, reactive } from "vue";
+import { defineProps, reactive, onMounted} from "vue";
 import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
 
@@ -110,6 +110,21 @@ const formatDay = (timestamp) => {
     }
   );
 };
+
+const formatHour = (timestamp) => {
+  return new Date(timestamp * 1000).toLocaleTimeString(
+    props.lang === "en" ? "en-US" : "pt-BR",
+    {
+      hour: "2-digit",
+      minute: "2-digit",
+    }
+  );
+};
+
+onMounted(() => {
+  console.log(props.weatherData);
+});
+
 </script>
 
 <style scoped>

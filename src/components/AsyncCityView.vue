@@ -205,7 +205,6 @@
   const store = useStore();
 
   const hourlyWeather = ref(null);
-  const weekWeather = ref(null);
   const weatherData = ref(null);
   const router = useRouter();
   const isLoading = ref(true);
@@ -279,8 +278,6 @@
           };
         }),
       };
-      
-      console.log(weekWeather.value);
     }
   });
 

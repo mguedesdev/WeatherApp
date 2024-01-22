@@ -36,6 +36,11 @@
   "preview_city_message": "You are currently previewing this city, click the \"+\" icon to start tracking this city.",
 
   "Week Weather": "Week Weather",
-  "Hourly Weather": "Hourly Weather"
+  "Hourly Weather": "Hourly Weather",
+
+  "pressure": "Pressure",
+  "uv_index": "UV Index"
+
+
   
 }

@@ -36,5 +36,9 @@
   "preview_city_message": "Você está visualizando esta cidade, clique no ícone \"+\" para começar a rastreá-la.",
 
   "Week Weather": "Previsão Semanal",
-  "Hourly Weather": "Previsão por Hora"
+  "Hourly Weather": "Previsão por Hora",
+
+  "details": "Detalhes",
+  "pressure": "Pressão",
+  "uv_index": "Índice UV"
 }
