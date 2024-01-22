@@ -1,7 +1,7 @@
 <template>
   <transition name="page" mode="out-in">
     <template v-if="isLoading">
-      <CityViewSkeleton  />
+      <CityViewSkeleton class="p-4" />
     </template>
     <template v-else>
       <div key="content" class=" flex flex-col flex-1 items-center">

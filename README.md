@@ -15,7 +15,7 @@ The Local Weather App é um aplicativo de previsão do tempo construído com Vue
 
 - Pesquisa de cidades usando a API Mapbox.
 
-- Exibição de informações meteorológicas detalhadas para cidades selecionadas.
+- Exibição de informações meteorológicas detalhadas para cidades selecionadas com a API openWeather.
 
 - Suporte multilíngue com troca dinâmica de idiomas (inglês e português).
 
